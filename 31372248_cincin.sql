@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 19 Lut 2021, 02:44
+-- Czas generowania: 19 Lut 2021, 19:02
 -- Wersja serwera: 5.7.31-34
 -- Wersja PHP: 7.4.6
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `31372248_cincin`
 --
-CREATE DATABASE IF NOT EXISTS `31372248_cincin` DEFAULT CHARACTER SET latin2 COLLATE latin2_general_ci;
-USE `31372248_cincin`;
 
 -- --------------------------------------------------------
 
@@ -48,7 +46,8 @@ CREATE TABLE `batches` (
 
 INSERT INTO `batches` (`batch_id`, `batch_weight`, `batch_left`, `batch_name`, `batch_price`, `batch_single_price`, `batch_date_in`, `batch_lost`, `is_archive`, `user_id`) VALUES
 (2, '200', '0', 'Test', '5000', '40', '2021-02-13 16:00:51', '100', 1, 5),
-(3, '300', '300', 'Nowy', '3000', '10', '2021-02-13 16:20:41', '0', 0, 5);
+(3, '300', '300', 'Nowy', '3000', '10', '2021-02-13 16:20:41', '0', 0, 5),
+(4, '40', '39', 'Kaszanka', '1000', '25', '2021-02-19 17:53:24', '0', 0, 7);
 
 -- --------------------------------------------------------
 
@@ -70,7 +69,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transaction_id`, `transaction_price`, `transaction_pieces`, `transaction_time_in`, `user_id`, `batch_id`) VALUES
-(10, '8000', '100', '2021-02-13 16:01:38', 5, 2);
+(10, '8000', '100', '2021-02-13 16:01:38', 5, 2),
+(11, '40', '1', '2021-02-19 17:54:18', 7, 4);
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `pass`) VALUES
-(5, 'suman', '$2b$10$OL.q9Jn0yoa4L/oQByj6iuI3/.h4n0m40lq/FaMEoM3/0/56SiuGi');
+(5, 'suman', '$2b$10$OL.q9Jn0yoa4L/oQByj6iuI3/.h4n0m40lq/FaMEoM3/0/56SiuGi'),
+(6, 'sumana', '$2b$10$kKA2PR8WyPXmsTdhUlvkQuiqBVbArhkHbWRbgK1OJdTuweQMpHA4i'),
+(7, 'thanks', '$2b$10$pIgBicu5Ajfh7lwSvZl3V.zVwc83PC4PRC7wt0ThT84VWxDI.MAGe');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -111,7 +113,8 @@ ALTER TABLE `transactions`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
@@ -121,19 +124,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `batches`
 --
 ALTER TABLE `batches`
-  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
